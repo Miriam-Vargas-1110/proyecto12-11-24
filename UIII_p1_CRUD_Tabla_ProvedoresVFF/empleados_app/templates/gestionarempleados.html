@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+    <div class="row"><!-- la fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 cold-xl-4"> <!-- columna izquierda -->
+
+        <h1> Provedores 🦄</h1>
+        <div class="card"><!-- la tarjeta -->
+            <div class="card-body">
+                <form action="registrarprovedores/" method="POST"> {% csrf_token %} <!-- falta action-->
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" class="form-control" placeholder="id provedores" minlength="1" maxlength="6" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre provedores"  maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnumero" name="txtnumero" class="form-control" placeholder="Numero provedores"  maxlength="15" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="skzdireccion" name="skzdireccion" class="form-control" placeholder="Direccion provedores"  maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="skzidproductos" name="skzidproductos" class="form-control" placeholder="id productos"  maxlength="25" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="skzprecio" name="skzprecio" class="form-control" placeholder="Precio provedores"  maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <input type="text" id="skzmarca" name="skzmarca" class="form-control" placeholder="Marca provedores"  maxlength="50" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <div class="form-group py-2">
+                            <button type="submit" class="btn btn-primary">Guardar Provedor</button>
+                    </div>
+                    </div>
+                </form>
+                </div>
+            </div> <!-- la tarjeta -->
+
+    </div><!-- columna izquierda-->
+
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- columna derecha -->
+    <h1> Listado de Provedores 🌺</h1>
+    <!--   La tabla  -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">id</th>
+                <th scope="col">nombre</th>
+                <th scope="col">numero</th>
+                <th scope="col">direcccion</th>
+                <th scope="col">idproducto</th>
+                <th scope="col">precio</th>
+                <th scope="col">marca</th>
+                <th> Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for m in misprovedores %}
+            <tr>
+                <td>
+                    {{forloop.counter}}
+                    <td> {{m.id}} </td>
+                    <td> {{m.nombre}} </td>
+                    <td> {{m.numero}} </td>
+                    <td> {{m.direccion}} </td>
+                    <td> {{m.idproductos}} </td>
+                    <td> {{m.precio}} </td>
+                    <td> {{m.marca}} </td>
+                    <td> <a href="seleccionarprovedores/{{m.id}}" class="btn btn-info">Editar</a></td>
+                    <td> <a href="borrarprovedores/{{m.id}}" class="btn btn-danger">Borrar</a></td>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <!--   La tabla  -->
+    </div> <!-- columna derecha -->
+</div> <!-- la fila -->
+
+{% endblock  %}
